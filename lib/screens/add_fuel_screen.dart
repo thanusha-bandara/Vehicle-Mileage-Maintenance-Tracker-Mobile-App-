@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../viewmodels/fuel_viewmodel.dart';
 import '../models/fuel_log.dart';
+import '../models/vehicle.dart';
 
 class AddFuelScreen extends StatefulWidget {
   const AddFuelScreen({super.key});
