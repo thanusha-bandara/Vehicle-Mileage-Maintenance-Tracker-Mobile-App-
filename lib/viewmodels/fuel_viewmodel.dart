@@ -5,7 +5,8 @@ import '../models/vehicle.dart';
 class FuelViewModel extends ChangeNotifier {
   // Dummy initial vehicle
   Vehicle _currentVehicle = Vehicle(
-    id: 'v1',
+    vehicleId: 'v1',
+    userId: 'u1',
     name: 'Bajaj Discover 125',
     averageMileage: 45.0,
   );
@@ -15,13 +16,12 @@ class FuelViewModel extends ChangeNotifier {
   // Dummy list of fuel logs
   final List<FuelLog> _fuelLogs = [
     FuelLog(
-      id: 'log1',
-      odometerReading: 24490,
-      fuelVolume: 8.0,
-      totalBill: 2800.0,
+      logId: 'log1',
+      vehicleId: 'v1',
+      odoReading: 24490,
+      liters: 8.0,
+      price: 2800.0,
       date: DateTime.now().subtract(const Duration(days: 5)),
-      station: 'CEYPETCO - Polonnaruwa',
-      isFullTank: true,
     ),
   ];
 
@@ -29,7 +29,7 @@ class FuelViewModel extends ChangeNotifier {
 
   // Stats
   double get currentOdometer =>
-      _fuelLogs.isNotEmpty ? _fuelLogs.last.odometerReading : 0.0;
+      _fuelLogs.isNotEmpty ? _fuelLogs.last.odoReading : 0.0;
 
   void addFuelLog(FuelLog log) {
     _fuelLogs.add(log);

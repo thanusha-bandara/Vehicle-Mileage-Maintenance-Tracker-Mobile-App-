@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../viewmodels/fuel_viewmodel.dart';
+import '../viewmodels/auth_viewmodel.dart';
 import 'add_fuel_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -9,8 +10,9 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ViewModel ekata connect wem
+    // Connect to ViewModel
     final fuelViewModel = Provider.of<FuelViewModel>(context);
+    final authViewModel = Provider.of<AuthViewModel>(context, listen: false);
     final vehicle = fuelViewModel.currentVehicle;
 
     return Scaffold(
@@ -20,12 +22,20 @@ class HomeScreen extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.blueAccent,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout, color: Colors.white),
+            onPressed: () async {
+              await authViewModel.logout();
+            },
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // Vehicle detail card eka ViewModel eken data gannawa
+            // Vehicle detail card fetches data from ViewModel
             Card(
               elevation: 4,
               child: Padding(
@@ -49,8 +59,8 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const Spacer(), // Idak thiyanna
-            // Add Fuel Button eka
+            const Spacer(), // Adds spacing
+            // Add Fuel Button
             SizedBox(
               width: double.infinity,
               height: 50,

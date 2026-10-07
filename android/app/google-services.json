@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1087690667162",
+    "project_id": "vaahane-c8256",
+    "storage_bucket": "vaahane-c8256.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1087690667162:android:b0aa6b3c26b02a6a461b23",
+        "android_client_info": {
+          "package_name": "com.example.vaahane"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1087690667162-0o6jvb0egoee8a9kth2ae344v62fj8bk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgCOH_mqjQEz4c-IwvA8HWbEXn4HasNms"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1087690667162-0o6jvb0egoee8a9kth2ae344v62fj8bk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
