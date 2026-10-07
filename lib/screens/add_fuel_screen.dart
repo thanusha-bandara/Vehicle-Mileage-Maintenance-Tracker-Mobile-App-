@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../viewmodels/fuel_viewmodel.dart';
+import '../models/fuel_log.dart';
 
 class AddFuelScreen extends StatefulWidget {
   const AddFuelScreen({super.key});
@@ -12,6 +16,10 @@ class _AddFuelScreenState extends State<AddFuelScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // MVVM Provider eken data gannawa
+    final fuelViewModel = Provider.of<FuelViewModel>(context);
+    final vehicle = fuelViewModel.currentVehicle;
+
     return Scaffold(
       backgroundColor:
           Colors.grey[100], // Image eke thiyena light background eka
@@ -56,10 +64,10 @@ class _AddFuelScreenState extends State<AddFuelScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildHeaderRow(context),
+              _buildHeaderRow(context, vehicle),
               const SizedBox(height: 20),
 
-              _buildLiveTripCard(),
+              _buildLiveTripCard(vehicle),
               const SizedBox(height: 25),
 
               // Odometer Section
@@ -173,7 +181,7 @@ class _AddFuelScreenState extends State<AddFuelScreen> {
 
   // ---- Helper Functions (UI kalli bedala liyapu widiha) ----
 
-  Widget _buildHeaderRow(BuildContext context) {
+  Widget _buildHeaderRow(BuildContext context, Vehicle vehicle) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -202,12 +210,12 @@ class _AddFuelScreenState extends State<AddFuelScreen> {
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Row(
-                children: const [
-                  Icon(Icons.motorcycle, size: 14, color: Color(0xFF0D6EFD)),
-                  SizedBox(width: 5),
+                children: [
+                  const Icon(Icons.motorcycle, size: 14, color: Color(0xFF0D6EFD)),
+                  const SizedBox(width: 5),
                   Text(
-                    'Bajaj Discover 125',
-                    style: TextStyle(
+                    vehicle.name,
+                    style: const TextStyle(
                       fontSize: 12,
                       color: Color(0xFF0D6EFD),
                       fontWeight: FontWeight.bold,
@@ -231,7 +239,7 @@ class _AddFuelScreenState extends State<AddFuelScreen> {
     );
   }
 
-  Widget _buildLiveTripCard() {
+  Widget _buildLiveTripCard(Vehicle vehicle) {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(20),
@@ -277,16 +285,16 @@ class _AddFuelScreenState extends State<AddFuelScreen> {
           const SizedBox(height: 10),
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
-            children: const [
+            children: [
               Text(
-                '45.0',
-                style: TextStyle(
+                '${vehicle.averageMileage}',
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 48,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(bottom: 10, left: 5),
                 child: Text(
                   'km/L',

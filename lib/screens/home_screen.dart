@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../viewmodels/fuel_viewmodel.dart';
 import 'add_fuel_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -7,6 +9,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ViewModel ekata connect wem
+    final fuelViewModel = Provider.of<FuelViewModel>(context);
+    final vehicle = fuelViewModel.currentVehicle;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -19,25 +25,25 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // Vehicle detail card eka
+            // Vehicle detail card eka ViewModel eken data gannawa
             Card(
               elevation: 4,
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
+                  children: [
                     Text(
-                      'Bajaj Discover 125',
-                      style: TextStyle(
+                      vehicle.name,
+                      style: const TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     Text(
-                      'Avg Mileage: 45 km/l',
-                      style: TextStyle(fontSize: 16),
+                      'Avg Mileage: ${vehicle.averageMileage} km/l',
+                      style: const TextStyle(fontSize: 16),
                     ),
                   ],
                 ),
