@@ -7,6 +7,7 @@ class FuelLog {
   final double liters;
   final double odoReading;
   final double price;
+  final bool isFullTank;
 
   FuelLog({
     required this.logId,
@@ -15,6 +16,7 @@ class FuelLog {
     required this.liters,
     required this.odoReading,
     required this.price,
+    this.isFullTank = false,
   });
 
   factory FuelLog.fromJson(Map<String, dynamic> json) {
@@ -35,6 +37,7 @@ class FuelLog {
       liters: (json['liters'] as num?)?.toDouble() ?? 0.0,
       odoReading: (json['odo_reading'] as num?)?.toDouble() ?? 0.0,
       price: (json['price'] as num?)?.toDouble() ?? 0.0,
+      isFullTank: json['isFullTank'] as bool? ?? false,
     );
   }
 
@@ -46,6 +49,7 @@ class FuelLog {
       'liters': liters,
       'odo_reading': odoReading,
       'price': price,
+      'isFullTank': isFullTank,
     };
   }
 }

@@ -4,12 +4,16 @@ class CustomTextField extends StatelessWidget {
   final IconData icon;
   final String placeholder;
   final String unit;
+  final TextEditingController? controller;
+  final bool isNumber;
 
   const CustomTextField({
     super.key,
     required this.icon,
     required this.placeholder,
     required this.unit,
+    this.controller,
+    this.isNumber = true,
   });
 
   @override
@@ -27,10 +31,13 @@ class CustomTextField extends StatelessWidget {
           const SizedBox(width: 15),
           Expanded(
             child: TextFormField(
-              initialValue: placeholder,
-              keyboardType: TextInputType.number,
+              controller: controller,
+              keyboardType: isNumber ? TextInputType.number : TextInputType.text,
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              decoration: const InputDecoration(border: InputBorder.none),
+              decoration: InputDecoration(
+                border: InputBorder.none,
+                hintText: placeholder,
+              ),
             ),
           ),
           Text(

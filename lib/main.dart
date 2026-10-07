@@ -44,9 +44,14 @@ class AuthWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authViewModel = Provider.of<AuthViewModel>(context);
+    final fuelViewModel = Provider.of<FuelViewModel>(context, listen: false);
 
     // Navigate to HomeScreen if logged in, otherwise show LoginScreen
     if (authViewModel.user != null) {
+      // Load user data into FuelViewModel AFTER the current build frame
+      Future.microtask(() {
+        fuelViewModel.loadDataForUser(authViewModel.user!.uid);
+      });
       return const HomeScreen();
     } else {
       return const LoginScreen();
